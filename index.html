@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma de Videojuegos - Acceso</title>
+    <title>GameZone- Acceso</title>
     <style>
-        /* Estilos CSS para el formulario de login y registro */
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(to right, #6a11cb, #2575fc);
@@ -92,7 +92,7 @@
             padding: 12px;
             border-radius: 6px;
             font-weight: bold;
-            display: none; /* Oculto por defecto */
+            display: none; 
         }
         .message.success {
             background-color: #d4edda;
@@ -112,9 +112,9 @@
             text-align: right;
         }
 
-        /* Estilos para el Dashboard (contenido principal) */
+        
         .dashboard-container {
-            display: none; /* Oculto por defecto */
+            display: none; 
             text-align: center;
             background-color: rgba(255, 255, 255, 0.95);
             padding: 40px;
@@ -202,7 +202,7 @@
     </div>
 
     <script>
-        // Lógica de JavaScript
+        
         const authContainer = document.getElementById('auth-container');
         const loginForm = document.getElementById('login-form');
         const registerForm = document.getElementById('register-form');
@@ -212,13 +212,13 @@
         const registerMessage = document.getElementById('register-message');
         const loggedInUsernameDisplay = document.getElementById('logged-in-username');
 
-        // Referencias a los campos de input de login
+        
         const loginUsernameEmailInput = document.getElementById('login-username-email');
         const loginPasswordInput = document.getElementById('login-password');
         const loginUsernameEmailError = document.getElementById('login-username-email-error');
         const loginPasswordError = document.getElementById('login-password-error');
 
-        // Referencias a los campos de input de registro
+        
         const registerUsernameInput = document.getElementById('register-username');
         const registerEmailInput = document.getElementById('register-email');
         const registerPasswordInput = document.getElementById('register-password');
@@ -229,23 +229,22 @@
         const registerConfirmPasswordError = document.getElementById('register-confirm-password-error');
 
 
-        // Función para mostrar mensajes (éxito/error)
+        
         function showMessage(element, type, message) {
             element.className = `message ${type}`;
             element.textContent = message;
             element.style.display = 'block';
             setTimeout(() => {
                 element.style.display = 'none';
-            }, 5000); // Oculta el mensaje después de 5 segundos
+            }, 5000); 
         }
 
-        // Función para limpiar mensajes de error de campo
+       
         function clearFieldErrors() {
             document.querySelectorAll('.error-field').forEach(el => el.textContent = '');
         }
 
-        // Simulación de la base de datos de usuarios (usando localStorage)
-        // En un entorno real, esto interactuaría con tu PHP/MySQL
+        
         function getUsers() {
             const users = localStorage.getItem('users');
             return users ? JSON.parse(users) : [];
@@ -267,40 +266,40 @@
             localStorage.removeItem('loggedInUser');
         }
 
-        // Función para cambiar a la vista de registro
+       
         function showRegisterForm() {
             loginForm.style.display = 'none';
             registerForm.style.display = 'block';
             clearFieldErrors();
-            loginMessage.style.display = 'none'; // Oculta mensajes de login
-            registerMessage.style.display = 'none'; // Oculta mensajes de registro
+            loginMessage.style.display = 'none'; 
+            registerMessage.style.display = 'none'; 
         }
 
-        // Función para cambiar a la vista de login
+        
         function showLoginForm() {
             loginForm.style.display = 'block';
             registerForm.style.display = 'none';
             clearFieldErrors();
-            loginMessage.style.display = 'none'; // Oculta mensajes de login
-            registerMessage.style.display = 'none'; // Oculta mensajes de registro
+            loginMessage.style.display = 'none';
+            registerMessage.style.display = 'none'; 
         }
 
-        // Función para mostrar el dashboard y ocultar el formulario de auth
+       
         function showDashboard(username) {
             authContainer.style.display = 'none';
             dashboardContainer.style.display = 'block';
             loggedInUsernameDisplay.textContent = username;
         }
 
-        // Función para volver al formulario de auth y ocultar el dashboard
+        
         function showAuthForms() {
             authContainer.style.display = 'block';
             dashboardContainer.style.display = 'none';
         }
 
-        // Manejar el registro
+        
         function handleRegister() {
-            clearFieldErrors(); // Limpia errores anteriores
+            clearFieldErrors(); 
 
             const username = registerUsernameInput.value.trim();
             const email = registerEmailInput.value.trim();
@@ -333,7 +332,7 @@
 
             const users = getUsers();
 
-            // Simular validación de unicidad (en un entorno real, esto lo haría la DB)
+           
             if (users.some(u => u.username === username)) {
                 registerUsernameError.textContent = "Este nombre de usuario ya está en uso.";
                 showMessage(registerMessage, 'error', 'El nombre de usuario ya existe.');
@@ -345,19 +344,18 @@
                 return;
             }
 
-            // Simular hashing de contraseña (¡MUY BÁSICO, NO SEGURO PARA PRODUCCIÓN!)
-            const hashedPassword = btoa(password); // Simple codificación base64 para simular hash
+            const hashedPassword = btoa(password); 
 
             users.push({ username, email, password_hash: hashedPassword });
             saveUsers(users);
 
             showMessage(registerMessage, 'success', '¡Registro exitoso! Ya puedes iniciar sesión.');
-            setTimeout(showLoginForm, 2000); // Redirige al login después de un mensaje de éxito
+            setTimeout(showLoginForm, 2000); 
         }
 
-        // Manejar el login
+        
         function handleLogin() {
-            clearFieldErrors(); // Limpia errores anteriores
+            clearFieldErrors();
 
             const identifier = loginUsernameEmailInput.value.trim();
             const password = loginPasswordInput.value;
@@ -381,7 +379,7 @@
             const user = users.find(u => u.username === identifier || u.email === identifier);
 
             if (user) {
-                // Simular verificación de contraseña (usando la misma codificación base64)
+                
                 if (btoa(password) === user.password_hash) {
                     setLoggedInUser(user.username);
                     showMessage(loginMessage, 'success', '¡Inicio de sesión exitoso!');
@@ -396,17 +394,17 @@
             }
         }
 
-        // Manejar el logout
+        
         function handleLogout() {
             clearLoggedInUser();
             showMessage(loginMessage, 'success', 'Has cerrado sesión.');
             showAuthForms();
-            // Limpiar campos del formulario de login
+        
             loginUsernameEmailInput.value = '';
             loginPasswordInput.value = '';
         }
 
-        // Verificar el estado de login al cargar la página
+       
         window.onload = function() {
             const loggedInUser = getLoggedInUser();
             if (loggedInUser) {
