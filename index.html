@@ -296,7 +296,7 @@
             authContainer.style.display = 'block';
             dashboardContainer.style.display = 'none';
         }
-
+        
         
         function handleRegister() {
             clearFieldErrors(); 
@@ -384,6 +384,11 @@
                     setLoggedInUser(user.username);
                     showMessage(loginMessage, 'success', '¡Inicio de sesión exitoso!');
                     showDashboard(user.username);
+
+                     setTimeout(() => {
+                window.location.href = "videojuegos.html"; // Cambia a la ruta real de tu página
+            }, 2000);
+            
                 } else {
                     showMessage(loginMessage, 'error', 'Usuario o contraseña incorrectos.');
                     loginPasswordError.textContent = "Contraseña incorrecta.";
